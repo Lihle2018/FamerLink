@@ -22,6 +22,8 @@ namespace Domain.Entities
         public DeliveryWindow DeliveryWindow { get; set; }
         public string CancellationReason { get; set; }
         public Money RefundAmount { get; set; }
+        public int VendorId { get; set; }
+        public Vendor Vendor { get; set; }
     }
 
 

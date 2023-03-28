@@ -1,12 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Domain.Entities;
+using Domain.Interfaces;
+using FarmLink.Infrastructure.Data;
+
 
 namespace Infrastructure.Data.Repositories
 {
-    internal class ReviewRepository
+    public class ReviewRepository : Repository<Review>, IReviewRepository
     {
+        public ReviewRepository(FarmLinkDbContext context) : base(context)
+        {
+        }
+
+        public IEnumerable<Review> GetByProduct(Product product)
+        {
+            return _context.Reviews
+                .Where(r => r.Product.Id == product.Id)
+                .ToList();
+        }
+
+        public IEnumerable<Review> GetByCustomer(Customer customer)
+        {
+            return _context.Reviews
+                .Where(r => r.Customer.Id == customer.Id)
+                .ToList();
+        }
     }
+
 }

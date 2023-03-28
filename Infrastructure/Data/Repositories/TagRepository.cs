@@ -1,12 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Domain.Entities;
+using Domain.Interfaces;
+using FarmLink.Infrastructure.Data;
 
 namespace Infrastructure.Data.Repositories
 {
-    internal class TagRepository
+    public class TagRepository : Repository<Tag>, ITagRepository
     {
+        public TagRepository(FarmLinkDbContext context) : base(context)
+        {
+        }
+
+        public IEnumerable<Tag> GetByVendor(Vendor vendor)
+        {
+            return _context.VendorTags
+             .Where(vt => vt.VendorId == vendor.Id)
+             .Select(vt => vt.Tag)
+             .Distinct()
+             .ToList();
+        }
     }
 }

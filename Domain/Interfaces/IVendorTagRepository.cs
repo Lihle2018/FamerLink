@@ -3,6 +3,6 @@ namespace Domain.Interfaces
 {
     public interface IVendorTagRepository : IRepository<VendorTag>
     {
-        Task<List<VendorTag>> GetAllByVendorIdAsync(int vendorId);
+       List<VendorTag> GetAllByVendorId(int vendorId);
     }
 }
