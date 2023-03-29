@@ -1,7 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Domain.Entities;
-
-namespace FarmLink.Infrastructure.Data
+﻿namespace FarmLink.Infrastructure.Data
 {
     public class FarmLinkDbContext : DbContext
     {

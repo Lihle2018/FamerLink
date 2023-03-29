@@ -1,8 +1,4 @@
-﻿
-using Domain.Interfaces;
-using FarmLink.Infrastructure.Data;
-
-namespace Infrastructure.Data.Repositories
+﻿namespace Infrastructure.Data.Repositories
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {

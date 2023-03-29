@@ -1,8 +1,4 @@
 ﻿
-using Domain.Entities;
-using Domain.Interfaces;
-using FarmLink.Infrastructure.Data;
-
 namespace Infrastructure.Data.Repositories
 {
     public class VendorTagRepository : Repository<VendorTag>, IVendorTagRepository

@@ -1,10 +1,4 @@
-﻿using Domain.Entities;
-using Domain.Interfaces;
-using Domain.ValueObjects;
-using FarmLink.Infrastructure.Data;
-
-
-namespace Infrastructure.Data.Repositories
+﻿namespace Infrastructure.Data.Repositories
 {
     public class LocationRepository : Repository<Location>, ILocationRepository
     {
