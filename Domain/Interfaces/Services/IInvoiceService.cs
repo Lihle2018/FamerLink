@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Domain.Interfaces.Services
+﻿namespace Domain.Interfaces.Services
 {
-    internal interface IInvoiceService
+    public interface IInvoiceService
     {
+        byte[] GenerateInvoicePdf(int orderId);
     }
 }
