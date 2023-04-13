@@ -1,15 +1,9 @@
-﻿using Domain.ValueObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-
-namespace Domain.ValueObjects
+﻿namespace Domain.ValueObjects
 {
+    [Serializable]
 public class CreditCard : ValueObject<CreditCard>
 {
+       
     public string CardNumber { get; }
     public string CardholderName { get; }
     public int ExpirationMonth { get; }

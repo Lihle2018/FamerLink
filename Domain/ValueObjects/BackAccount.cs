@@ -1,6 +1,7 @@
 ﻿
 namespace Domain.ValueObjects
 {
+    [Serializable]
     public class BankAccount : ValueObject<BankAccount>
     {
         public string AccountNumber { get; }

@@ -1,5 +1,6 @@
 ﻿namespace Domain.ValueObjects
 {
+    [Serializable]
     public class ContactInfo : ValueObject<ContactInfo>
     {
         public string Email { get; private set; }

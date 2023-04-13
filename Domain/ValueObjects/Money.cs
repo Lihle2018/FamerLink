@@ -13,7 +13,10 @@ namespace Domain.ValueObjects
             Amount = amount;
             Currency = currency;
         }
-
+        public Money()
+        {
+            // Empty constructor needed for EF Core to work properly
+        }
         public decimal Amount { get; }
         public Currency Currency { get; }
 

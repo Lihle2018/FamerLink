@@ -14,7 +14,10 @@ namespace Domain.ValueObjects
             CreditCard = creditCard;
             BankAccount = bankAccount;
         }
-
+        public PaymentMethod()
+        {
+            // Empty constructor needed for EF Core to work properly
+        }
         protected override IEnumerable<object> GetEqualityComponents()
         {
             yield return Name;

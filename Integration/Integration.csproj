@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -7,11 +7,25 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Clients\" />
+    <Compile Remove="Clients\**" />
+    <EmbeddedResource Remove="Clients\**" />
+    <None Remove="Clients\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Mappers\" />
     <Folder Include="Handlers\" />
     <Folder Include="Helpers\" />
     <Folder Include="Queues\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GoogleMaps.LocationServices" Version="1.2.0.5" />
+    <PackageReference Include="GoogleMapsApi" Version="1.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
 </Project>

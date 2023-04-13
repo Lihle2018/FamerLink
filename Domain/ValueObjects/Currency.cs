@@ -3,6 +3,8 @@
     /// <summary>
     /// Note that the Currency class has a private constructor to ensure that instances can only be created through the GetByCode method, which enforces that the code is always in upper case. This helps to ensure consistency in the application. The class also overrides the ToString method so that it returns the currency code as a string.
     /// </summary>
+
+    [Serializable]
     public class Currency : ValueObject<Currency>
     {
         private Currency(string code)

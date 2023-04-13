@@ -1,6 +1,7 @@
-﻿
-namespace Domain.ValueObjects
+﻿namespace Domain.ValueObjects
 {
+    [Serializable]
+    [Keyless]
     public class Address : ValueObject<Address>
     {
         public string Street { get; }
@@ -14,6 +15,10 @@ namespace Domain.ValueObjects
             City = city;
             State = state;
             ZipCode = zipCode;
+        }
+        public Address()
+        {
+            // Empty constructor needed for EF Core to work properly
         }
 
         protected override IEnumerable<object> GetEqualityComponents()

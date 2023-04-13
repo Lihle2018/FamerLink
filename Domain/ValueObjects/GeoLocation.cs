@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Domain.ValueObjects
+﻿namespace Domain.ValueObjects
 {
+    [Serializable]
     public class GeoLocation : ValueObject<GeoLocation>
     {
         public double Latitude { get; }
@@ -16,7 +11,10 @@ namespace Domain.ValueObjects
             Latitude = latitude;
             Longitude = longitude;
         }
-
+        public GeoLocation()
+        {
+            // Empty constructor needed for EF Core to work properly
+        }
         protected override IEnumerable<object> GetEqualityComponents()
         {
             yield return Latitude;

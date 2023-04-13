@@ -2,7 +2,7 @@
 {
     public interface IMapService
     {
-        Location GetLocation(Address address);
-        IEnumerable<Location> GetNearbyLocations(Location location, int radius);
+        Task<Location> GetLocationAsync(Address address);
+        Task<IEnumerable<Location>> GetNearbyLocationsAsync(Location location, int radius);
     }
 }

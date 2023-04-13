@@ -1,4 +1,7 @@
-﻿namespace FarmLink.Infrastructure.Data
+﻿using Domain.Entities;
+using Org.BouncyCastle.Math.EC.Rfc7748;
+
+namespace FarmLink.Infrastructure.Data
 {
     public class FarmLinkDbContext : DbContext
     {
@@ -22,8 +25,9 @@
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            // Configure entity mappings, relationships, etc.
+            modelBuilder.Entity<ProductTag>().HasKey(x=>new{x.ProductId,x.TagId});
+            modelBuilder.Entity<UserRole>().HasKey(x => new {x.UserId,x.RoleId});
+           
         }
     }
 }
