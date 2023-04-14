@@ -12,7 +12,10 @@ namespace Domain.ValueObjects
             AccountNumber = accountNumber;
             RoutingNumber = routingNumber;
         }
-
+        public BankAccount()
+        {
+            // Empty constructor needed for EF Core to work properly
+        }
         protected override IEnumerable<object> GetEqualityComponents()
         {
             yield return AccountNumber;

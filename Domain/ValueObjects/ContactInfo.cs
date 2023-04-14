@@ -6,7 +6,10 @@
         public string Email { get; private set; }
         public string Phone { get; private set; }
 
-        protected ContactInfo() { }
+        protected ContactInfo()
+        {
+            // Empty constructor needed for EF Core to work properly
+        }
 
         public ContactInfo(string email, string phone)
         {

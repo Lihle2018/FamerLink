@@ -11,7 +11,10 @@
         {
             Code = code;
         }
-
+        public Currency()
+        {
+            // Empty constructor needed for EF Core to work properly
+        }
         public string Code { get; }
 
         public static Currency USD => new Currency("USD");
