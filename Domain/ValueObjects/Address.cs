@@ -1,6 +1,7 @@
 ﻿namespace Domain.ValueObjects
 {
     [Serializable]
+    [Owned]
     public class Address : ValueObject<Address>
     {
         public string Street { get; }

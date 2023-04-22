@@ -2,6 +2,8 @@
 
 namespace Domain.ValueObjects
 {
+    [Serializable]
+    [Owned]
     public class PaymentMethod : ValueObject<PaymentMethod>
     {
         public string Name { get; }

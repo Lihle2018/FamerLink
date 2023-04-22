@@ -28,100 +28,101 @@ namespace FarmLink.Infrastructure.Data
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<ProductTag>().HasKey(x=>new{x.ProductId,x.TagId});
             modelBuilder.Entity<UserRole>().HasKey(x => new {x.UserId,x.RoleId});
+            
 
-            modelBuilder.Entity<Location>().OwnsOne(x => x.Address, NavigationBuilder =>
-            {
-                NavigationBuilder.Property(address => address.Street);
-                NavigationBuilder.Property(address => address.City);
-                NavigationBuilder.Property(address => address.State);
-                NavigationBuilder.Property(address => address.ZipCode);
-            });
-            modelBuilder.Entity<Location>().OwnsOne(x => x.GeoLocation, NavigationBuilder =>
-            {
-                NavigationBuilder.Property(geolocation => geolocation.Latitude);
-                NavigationBuilder.Property(geolocation => geolocation.Longitude);
-            });
-            modelBuilder.Entity<Vendor>().OwnsOne(x => x.ContactInfo, NavigationBuilder =>
-            {
-                NavigationBuilder.Property(address => address.Email);
-                NavigationBuilder.Property(address => address.Phone);
-            });
-            modelBuilder.Entity<Vendor>().OwnsOne(x => x.MinimumOrderAmount, NavigationBuilder =>
-            {
-                NavigationBuilder.Property(money => money.Amount);
-                NavigationBuilder.OwnsOne(money => money.Currency,NavigationBuilder=>
-                {
-                    NavigationBuilder.Property(currency => currency.Code);
-                });
-            });
-            modelBuilder.Entity<Order>().OwnsOne(x => x.DeliveryFee, NavigationBuilder =>
-            {
-                NavigationBuilder.Property(money => money.Amount);
-                NavigationBuilder.OwnsOne(money => money.Currency, NavigationBuilder =>
-                {
-                    NavigationBuilder.Property(currency => currency.Code);
-                });
-            });
-            modelBuilder.Entity<Order>().OwnsOne(x => x.RefundAmount, NavigationBuilder =>
-            {
-                NavigationBuilder.Property(money => money.Amount);
-                NavigationBuilder.OwnsOne(money => money.Currency, NavigationBuilder =>
-                {
-                    NavigationBuilder.Property(currency => currency.Code);
-                });
-            });
-            modelBuilder.Entity<Order>().OwnsOne(x => x.TaxAmount, NavigationBuilder =>
-            {
-                NavigationBuilder.Property(money => money.Amount);
-                NavigationBuilder.OwnsOne(money => money.Currency, NavigationBuilder =>
-                {
-                    NavigationBuilder.Property(currency => currency.Code);
-                });
-            });
-            modelBuilder.Entity<Order>().OwnsOne(x => x.TotalAmount, NavigationBuilder =>
-            {
-                NavigationBuilder.Property(money => money.Amount);
-                NavigationBuilder.OwnsOne(money => money.Currency, NavigationBuilder =>
-                {
-                    NavigationBuilder.Property(currency => currency.Code);
-                });
-            });
-            modelBuilder.Entity<Order>().OwnsOne(x => x.PaymentMethod, NavigationBuilder =>
-            {
-                NavigationBuilder.Property(pm => pm.Name);
-                NavigationBuilder.OwnsOne(pm => pm.CreditCard, NavigationBuilder =>
-                {
-                    NavigationBuilder.Property(creditCard => creditCard.CardholderName);
-                    NavigationBuilder.Property(creditCard => creditCard.CardNumber);
-                    NavigationBuilder.Property(creditCard => creditCard.ExpirationMonth);
-                    NavigationBuilder.Property(creditCard => creditCard.ExpirationYear);
-                    NavigationBuilder.Property(creditCard => creditCard.CVV);
-                });
-                NavigationBuilder.OwnsOne(pm => pm.BankAccount, NavigationBuilder =>
-                {
-                    NavigationBuilder.Property(bankAccount => bankAccount.AccountNumber);
-                    NavigationBuilder.Property(bankAccount => bankAccount.RoutingNumber);
-                });
+            //modelBuilder.Entity<Location>().OwnsOne(x => x.Address, NavigationBuilder =>
+            //{
+            //    NavigationBuilder.Property(address => address.Street);
+            //    NavigationBuilder.Property(address => address.City);
+            //    NavigationBuilder.Property(address => address.State);
+            //    NavigationBuilder.Property(address => address.ZipCode);
+            //});
+            //modelBuilder.Entity<Location>().OwnsOne(x => x.GeoLocation, NavigationBuilder =>
+            //{
+            //    NavigationBuilder.Property(geolocation => geolocation.Latitude);
+            //    NavigationBuilder.Property(geolocation => geolocation.Longitude);
+            //});
+            //modelBuilder.Entity<Vendor>().OwnsOne(x => x.ContactInfo, NavigationBuilder =>
+            //{
+            //    NavigationBuilder.Property(address => address.Email);
+            //    NavigationBuilder.Property(address => address.Phone);
+            //});
+            //modelBuilder.Entity<Vendor>().OwnsOne(x => x.MinimumOrderAmount, NavigationBuilder =>
+            //{
+            //    NavigationBuilder.Property(money => money.Amount);
+            //    NavigationBuilder.OwnsOne(money => money.Currency,NavigationBuilder=>
+            //    {
+            //        NavigationBuilder.Property(currency => currency.Code);
+            //    });
+            //});
+            //modelBuilder.Entity<Order>().OwnsOne(x => x.DeliveryFee, NavigationBuilder =>
+            //{
+            //    NavigationBuilder.Property(money => money.Amount);
+            //    NavigationBuilder.OwnsOne(money => money.Currency, NavigationBuilder =>
+            //    {
+            //        NavigationBuilder.Property(currency => currency.Code);
+            //    });
+            //});
+            //modelBuilder.Entity<Order>().OwnsOne(x => x.RefundAmount, NavigationBuilder =>
+            //{
+            //    NavigationBuilder.Property(money => money.Amount);
+            //    NavigationBuilder.OwnsOne(money => money.Currency, NavigationBuilder =>
+            //    {
+            //        NavigationBuilder.Property(currency => currency.Code);
+            //    });
+            //});
+            //modelBuilder.Entity<Order>().OwnsOne(x => x.TaxAmount, NavigationBuilder =>
+            //{
+            //    NavigationBuilder.Property(money => money.Amount);
+            //    NavigationBuilder.OwnsOne(money => money.Currency, NavigationBuilder =>
+            //    {
+            //        NavigationBuilder.Property(currency => currency.Code);
+            //    });
+            //});
+            //modelBuilder.Entity<Order>().OwnsOne(x => x.TotalAmount, NavigationBuilder =>
+            //{
+            //    NavigationBuilder.Property(money => money.Amount);
+            //    NavigationBuilder.OwnsOne(money => money.Currency, NavigationBuilder =>
+            //    {
+            //        NavigationBuilder.Property(currency => currency.Code);
+            //    });
+            //});
+            //modelBuilder.Entity<Order>().OwnsOne(x => x.PaymentMethod, NavigationBuilder =>
+            //{
+            //    NavigationBuilder.Property(pm => pm.Name);
+            //    NavigationBuilder.OwnsOne(pm => pm.CreditCard, NavigationBuilder =>
+            //    {
+            //        NavigationBuilder.Property(creditCard => creditCard.CardholderName);
+            //        NavigationBuilder.Property(creditCard => creditCard.CardNumber);
+            //        NavigationBuilder.Property(creditCard => creditCard.ExpirationMonth);
+            //        NavigationBuilder.Property(creditCard => creditCard.ExpirationYear);
+            //        NavigationBuilder.Property(creditCard => creditCard.CVV);
+            //    });
+            //    NavigationBuilder.OwnsOne(pm => pm.BankAccount, NavigationBuilder =>
+            //    {
+            //        NavigationBuilder.Property(bankAccount => bankAccount.AccountNumber);
+            //        NavigationBuilder.Property(bankAccount => bankAccount.RoutingNumber);
+            //    });
                 
-            });
-            modelBuilder.Entity<Transaction>().OwnsOne(x => x.PaymentMethod, NavigationBuilder =>
-            {
-                NavigationBuilder.Property(pm => pm.Name);
-                NavigationBuilder.OwnsOne(pm => pm.CreditCard, NavigationBuilder =>
-                {
-                    NavigationBuilder.Property(creditCard => creditCard.CardholderName);
-                    NavigationBuilder.Property(creditCard => creditCard.CardNumber);
-                    NavigationBuilder.Property(creditCard => creditCard.ExpirationMonth);
-                    NavigationBuilder.Property(creditCard => creditCard.ExpirationYear);
-                    NavigationBuilder.Property(creditCard => creditCard.CVV);
-                });
-                NavigationBuilder.OwnsOne(pm => pm.BankAccount, NavigationBuilder =>
-                {
-                    NavigationBuilder.Property(bankAccount => bankAccount.AccountNumber);
-                    NavigationBuilder.Property(bankAccount => bankAccount.RoutingNumber);
-                });
+            //});
+            //modelBuilder.Entity<Transaction>().OwnsOne(x => x.PaymentMethod, NavigationBuilder =>
+            //{
+            //    NavigationBuilder.Property(pm => pm.Name);
+            //    NavigationBuilder.OwnsOne(pm => pm.CreditCard, NavigationBuilder =>
+            //    {
+            //        NavigationBuilder.Property(creditCard => creditCard.CardholderName);
+            //        NavigationBuilder.Property(creditCard => creditCard.CardNumber);
+            //        NavigationBuilder.Property(creditCard => creditCard.ExpirationMonth);
+            //        NavigationBuilder.Property(creditCard => creditCard.ExpirationYear);
+            //        NavigationBuilder.Property(creditCard => creditCard.CVV);
+            //    });
+            //    NavigationBuilder.OwnsOne(pm => pm.BankAccount, NavigationBuilder =>
+            //    {
+            //        NavigationBuilder.Property(bankAccount => bankAccount.AccountNumber);
+            //        NavigationBuilder.Property(bankAccount => bankAccount.RoutingNumber);
+            //    });
 
-            });
+            //});
         }
     }
 }

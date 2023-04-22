@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infrastructure.Migrations
 {
-    public partial class initialMigration : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -29,13 +29,7 @@ namespace Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address_Street = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address_City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address_State = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address_ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    GeoLocation_Latitude = table.Column<double>(type: "float", nullable: false),
-                    GeoLocation_Longitude = table.Column<double>(type: "float", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -75,14 +69,6 @@ namespace Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PaymentMethod_Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PaymentMethod_CreditCard_CardNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PaymentMethod_CreditCard_CardholderName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PaymentMethod_CreditCard_ExpirationMonth = table.Column<int>(type: "int", nullable: false),
-                    PaymentMethod_CreditCard_ExpirationYear = table.Column<int>(type: "int", nullable: false),
-                    PaymentMethod_CreditCard_CVV = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PaymentMethod_BankAccount_AccountNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PaymentMethod_BankAccount_RoutingNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: false),
                     VendorId = table.Column<int>(type: "int", nullable: false)
@@ -123,11 +109,9 @@ namespace Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LocationId = table.Column<int>(type: "int", nullable: false),
+                    LocationId = table.Column<int>(type: "int", nullable: true),
                     ContactInfo_Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ContactInfo_Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MinimumOrderAmount_Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    MinimumOrderAmount_Currency_Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AcceptsCreditCard = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -137,8 +121,7 @@ namespace Infrastructure.Migrations
                         name: "FK_Vendors_Locations_LocationId",
                         column: x => x.LocationId,
                         principalTable: "Locations",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -196,8 +179,8 @@ namespace Infrastructure.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    VendorId = table.Column<int>(type: "int", nullable: false),
-                    LocationId = table.Column<int>(type: "int", nullable: false)
+                    VendorId = table.Column<int>(type: "int", nullable: true),
+                    LocationId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -206,14 +189,12 @@ namespace Infrastructure.Migrations
                         name: "FK_Promotions_Locations_LocationId",
                         column: x => x.LocationId,
                         principalTable: "Locations",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Promotions_Vendors_VendorId",
                         column: x => x.VendorId,
                         principalTable: "Vendors",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -252,26 +233,10 @@ namespace Infrastructure.Migrations
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    TotalAmount_Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    TotalAmount_Currency_Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TaxAmount_Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    TaxAmount_Currency_Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DeliveryFee_Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    DeliveryFee_Currency_Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PaymentMethod_Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PaymentMethod_CreditCard_CardNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PaymentMethod_CreditCard_CardholderName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PaymentMethod_CreditCard_ExpirationMonth = table.Column<int>(type: "int", nullable: false),
-                    PaymentMethod_CreditCard_ExpirationYear = table.Column<int>(type: "int", nullable: false),
-                    PaymentMethod_CreditCard_CVV = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PaymentMethod_BankAccount_AccountNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PaymentMethod_BankAccount_RoutingNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PaymentTransactionId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DeliveryNote = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DeliveryWindowId = table.Column<int>(type: "int", nullable: false),
                     CancellationReason = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RefundAmount_Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    RefundAmount_Currency_Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     VendorId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -317,14 +282,12 @@ namespace Infrastructure.Migrations
                         name: "FK_UserRole_Role_RoleId",
                         column: x => x.RoleId,
                         principalTable: "Role",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_UserRole_User_UserId",
                         column: x => x.UserId,
                         principalTable: "User",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -370,14 +333,14 @@ namespace Infrastructure.Migrations
                         name: "FK_Reviews_Customers_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "Customers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
+                        
                     table.ForeignKey(
                         name: "FK_Reviews_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
+                       
                     table.ForeignKey(
                         name: "FK_Reviews_Vendors_VendorId",
                         column: x => x.VendorId,

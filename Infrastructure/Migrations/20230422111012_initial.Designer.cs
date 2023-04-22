@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(FarmLinkDbContext))]
-    [Migration("20230414113033_initialMigration")]
-    partial class initialMigration
+    [Migration("20230422111012_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -276,7 +276,7 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("LocationId")
+                    b.Property<int?>("LocationId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -285,7 +285,7 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("VendorId")
+                    b.Property<int?>("VendorId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -423,10 +423,10 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.UserRole", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<int>("RoleId")
+                    b.Property<int?>("RoleId")
                         .HasColumnType("int");
 
                     b.HasKey("UserId", "RoleId");
@@ -451,7 +451,7 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("LocationId")
+                    b.Property<int?>("LocationId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -506,22 +506,6 @@ namespace Infrastructure.Migrations
                             b1.Property<int>("LocationId")
                                 .HasColumnType("int");
 
-                            b1.Property<string>("City")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("State")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("Street")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("ZipCode")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
                             b1.HasKey("LocationId");
 
                             b1.ToTable("Locations");
@@ -534,12 +518,6 @@ namespace Infrastructure.Migrations
                         {
                             b1.Property<int>("LocationId")
                                 .HasColumnType("int");
-
-                            b1.Property<double>("Latitude")
-                                .HasColumnType("float");
-
-                            b1.Property<double>("Longitude")
-                                .HasColumnType("float");
 
                             b1.HasKey("LocationId");
 
@@ -585,35 +563,12 @@ namespace Infrastructure.Migrations
                             b1.Property<int>("OrderId")
                                 .HasColumnType("int");
 
-                            b1.Property<decimal>("Amount")
-                                .HasColumnType("decimal(18,2)");
-
                             b1.HasKey("OrderId");
 
                             b1.ToTable("Orders");
 
                             b1.WithOwner()
                                 .HasForeignKey("OrderId");
-
-                            b1.OwnsOne("Domain.ValueObjects.Currency", "Currency", b2 =>
-                                {
-                                    b2.Property<int>("MoneyOrderId")
-                                        .HasColumnType("int");
-
-                                    b2.Property<string>("Code")
-                                        .IsRequired()
-                                        .HasColumnType("nvarchar(max)");
-
-                                    b2.HasKey("MoneyOrderId");
-
-                                    b2.ToTable("Orders");
-
-                                    b2.WithOwner()
-                                        .HasForeignKey("MoneyOrderId");
-                                });
-
-                            b1.Navigation("Currency")
-                                .IsRequired();
                         });
 
                     b.OwnsOne("Domain.ValueObjects.PaymentMethod", "PaymentMethod", b1 =>
@@ -621,74 +576,12 @@ namespace Infrastructure.Migrations
                             b1.Property<int>("OrderId")
                                 .HasColumnType("int");
 
-                            b1.Property<string>("Name")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
                             b1.HasKey("OrderId");
 
                             b1.ToTable("Orders");
 
                             b1.WithOwner()
                                 .HasForeignKey("OrderId");
-
-                            b1.OwnsOne("Domain.ValueObjects.BankAccount", "BankAccount", b2 =>
-                                {
-                                    b2.Property<int>("PaymentMethodOrderId")
-                                        .HasColumnType("int");
-
-                                    b2.Property<string>("AccountNumber")
-                                        .IsRequired()
-                                        .HasColumnType("nvarchar(max)");
-
-                                    b2.Property<string>("RoutingNumber")
-                                        .IsRequired()
-                                        .HasColumnType("nvarchar(max)");
-
-                                    b2.HasKey("PaymentMethodOrderId");
-
-                                    b2.ToTable("Orders");
-
-                                    b2.WithOwner()
-                                        .HasForeignKey("PaymentMethodOrderId");
-                                });
-
-                            b1.OwnsOne("Domain.ValueObjects.CreditCard", "CreditCard", b2 =>
-                                {
-                                    b2.Property<int>("PaymentMethodOrderId")
-                                        .HasColumnType("int");
-
-                                    b2.Property<string>("CVV")
-                                        .IsRequired()
-                                        .HasColumnType("nvarchar(max)");
-
-                                    b2.Property<string>("CardNumber")
-                                        .IsRequired()
-                                        .HasColumnType("nvarchar(max)");
-
-                                    b2.Property<string>("CardholderName")
-                                        .IsRequired()
-                                        .HasColumnType("nvarchar(max)");
-
-                                    b2.Property<int>("ExpirationMonth")
-                                        .HasColumnType("int");
-
-                                    b2.Property<int>("ExpirationYear")
-                                        .HasColumnType("int");
-
-                                    b2.HasKey("PaymentMethodOrderId");
-
-                                    b2.ToTable("Orders");
-
-                                    b2.WithOwner()
-                                        .HasForeignKey("PaymentMethodOrderId");
-                                });
-
-                            b1.Navigation("BankAccount")
-                                .IsRequired();
-
-                            b1.Navigation("CreditCard")
-                                .IsRequired();
                         });
 
                     b.OwnsOne("Domain.ValueObjects.Money", "RefundAmount", b1 =>
@@ -696,35 +589,12 @@ namespace Infrastructure.Migrations
                             b1.Property<int>("OrderId")
                                 .HasColumnType("int");
 
-                            b1.Property<decimal>("Amount")
-                                .HasColumnType("decimal(18,2)");
-
                             b1.HasKey("OrderId");
 
                             b1.ToTable("Orders");
 
                             b1.WithOwner()
                                 .HasForeignKey("OrderId");
-
-                            b1.OwnsOne("Domain.ValueObjects.Currency", "Currency", b2 =>
-                                {
-                                    b2.Property<int>("MoneyOrderId")
-                                        .HasColumnType("int");
-
-                                    b2.Property<string>("Code")
-                                        .IsRequired()
-                                        .HasColumnType("nvarchar(max)");
-
-                                    b2.HasKey("MoneyOrderId");
-
-                                    b2.ToTable("Orders");
-
-                                    b2.WithOwner()
-                                        .HasForeignKey("MoneyOrderId");
-                                });
-
-                            b1.Navigation("Currency")
-                                .IsRequired();
                         });
 
                     b.OwnsOne("Domain.ValueObjects.Money", "TaxAmount", b1 =>
@@ -732,35 +602,12 @@ namespace Infrastructure.Migrations
                             b1.Property<int>("OrderId")
                                 .HasColumnType("int");
 
-                            b1.Property<decimal>("Amount")
-                                .HasColumnType("decimal(18,2)");
-
                             b1.HasKey("OrderId");
 
                             b1.ToTable("Orders");
 
                             b1.WithOwner()
                                 .HasForeignKey("OrderId");
-
-                            b1.OwnsOne("Domain.ValueObjects.Currency", "Currency", b2 =>
-                                {
-                                    b2.Property<int>("MoneyOrderId")
-                                        .HasColumnType("int");
-
-                                    b2.Property<string>("Code")
-                                        .IsRequired()
-                                        .HasColumnType("nvarchar(max)");
-
-                                    b2.HasKey("MoneyOrderId");
-
-                                    b2.ToTable("Orders");
-
-                                    b2.WithOwner()
-                                        .HasForeignKey("MoneyOrderId");
-                                });
-
-                            b1.Navigation("Currency")
-                                .IsRequired();
                         });
 
                     b.OwnsOne("Domain.ValueObjects.Money", "TotalAmount", b1 =>
@@ -768,35 +615,12 @@ namespace Infrastructure.Migrations
                             b1.Property<int>("OrderId")
                                 .HasColumnType("int");
 
-                            b1.Property<decimal>("Amount")
-                                .HasColumnType("decimal(18,2)");
-
                             b1.HasKey("OrderId");
 
                             b1.ToTable("Orders");
 
                             b1.WithOwner()
                                 .HasForeignKey("OrderId");
-
-                            b1.OwnsOne("Domain.ValueObjects.Currency", "Currency", b2 =>
-                                {
-                                    b2.Property<int>("MoneyOrderId")
-                                        .HasColumnType("int");
-
-                                    b2.Property<string>("Code")
-                                        .IsRequired()
-                                        .HasColumnType("nvarchar(max)");
-
-                                    b2.HasKey("MoneyOrderId");
-
-                                    b2.ToTable("Orders");
-
-                                    b2.WithOwner()
-                                        .HasForeignKey("MoneyOrderId");
-                                });
-
-                            b1.Navigation("Currency")
-                                .IsRequired();
                         });
 
                     b.Navigation("Customer");
@@ -897,15 +721,11 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Domain.Entities.Location", "Location")
                         .WithMany()
-                        .HasForeignKey("LocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("LocationId");
 
                     b.HasOne("Domain.Entities.Vendor", "Vendor")
                         .WithMany()
-                        .HasForeignKey("VendorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("VendorId");
 
                     b.Navigation("Location");
 
@@ -946,74 +766,12 @@ namespace Infrastructure.Migrations
                             b1.Property<int>("TransactionId")
                                 .HasColumnType("int");
 
-                            b1.Property<string>("Name")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
                             b1.HasKey("TransactionId");
 
                             b1.ToTable("Transactions");
 
                             b1.WithOwner()
                                 .HasForeignKey("TransactionId");
-
-                            b1.OwnsOne("Domain.ValueObjects.BankAccount", "BankAccount", b2 =>
-                                {
-                                    b2.Property<int>("PaymentMethodTransactionId")
-                                        .HasColumnType("int");
-
-                                    b2.Property<string>("AccountNumber")
-                                        .IsRequired()
-                                        .HasColumnType("nvarchar(max)");
-
-                                    b2.Property<string>("RoutingNumber")
-                                        .IsRequired()
-                                        .HasColumnType("nvarchar(max)");
-
-                                    b2.HasKey("PaymentMethodTransactionId");
-
-                                    b2.ToTable("Transactions");
-
-                                    b2.WithOwner()
-                                        .HasForeignKey("PaymentMethodTransactionId");
-                                });
-
-                            b1.OwnsOne("Domain.ValueObjects.CreditCard", "CreditCard", b2 =>
-                                {
-                                    b2.Property<int>("PaymentMethodTransactionId")
-                                        .HasColumnType("int");
-
-                                    b2.Property<string>("CVV")
-                                        .IsRequired()
-                                        .HasColumnType("nvarchar(max)");
-
-                                    b2.Property<string>("CardNumber")
-                                        .IsRequired()
-                                        .HasColumnType("nvarchar(max)");
-
-                                    b2.Property<string>("CardholderName")
-                                        .IsRequired()
-                                        .HasColumnType("nvarchar(max)");
-
-                                    b2.Property<int>("ExpirationMonth")
-                                        .HasColumnType("int");
-
-                                    b2.Property<int>("ExpirationYear")
-                                        .HasColumnType("int");
-
-                                    b2.HasKey("PaymentMethodTransactionId");
-
-                                    b2.ToTable("Transactions");
-
-                                    b2.WithOwner()
-                                        .HasForeignKey("PaymentMethodTransactionId");
-                                });
-
-                            b1.Navigation("BankAccount")
-                                .IsRequired();
-
-                            b1.Navigation("CreditCard")
-                                .IsRequired();
                         });
 
                     b.Navigation("PaymentMethod")
@@ -1054,17 +812,12 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Domain.Entities.Location", "Location")
                         .WithMany("Vendors")
-                        .HasForeignKey("LocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("LocationId");
 
                     b.OwnsOne("Domain.ValueObjects.Money", "MinimumOrderAmount", b1 =>
                         {
                             b1.Property<int>("VendorId")
                                 .HasColumnType("int");
-
-                            b1.Property<decimal>("Amount")
-                                .HasColumnType("decimal(18,2)");
 
                             b1.HasKey("VendorId");
 
@@ -1072,26 +825,6 @@ namespace Infrastructure.Migrations
 
                             b1.WithOwner()
                                 .HasForeignKey("VendorId");
-
-                            b1.OwnsOne("Domain.ValueObjects.Currency", "Currency", b2 =>
-                                {
-                                    b2.Property<int>("MoneyVendorId")
-                                        .HasColumnType("int");
-
-                                    b2.Property<string>("Code")
-                                        .IsRequired()
-                                        .HasColumnType("nvarchar(max)");
-
-                                    b2.HasKey("MoneyVendorId");
-
-                                    b2.ToTable("Vendors");
-
-                                    b2.WithOwner()
-                                        .HasForeignKey("MoneyVendorId");
-                                });
-
-                            b1.Navigation("Currency")
-                                .IsRequired();
                         });
 
                     b.OwnsOne("Domain.ValueObjects.ContactInfo", "ContactInfo", b1 =>

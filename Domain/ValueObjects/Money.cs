@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Domain.ValueObjects
+﻿namespace Domain.ValueObjects
 {
+    [Serializable]
+    [Owned]
+    
     public class Money : ValueObject<Money>
     {
         private Money(decimal amount, Currency currency)

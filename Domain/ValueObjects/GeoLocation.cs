@@ -1,6 +1,7 @@
 ﻿namespace Domain.ValueObjects
 {
     [Serializable]
+    [Owned]
     public class GeoLocation : ValueObject<GeoLocation>
     {
         public double Latitude { get; }

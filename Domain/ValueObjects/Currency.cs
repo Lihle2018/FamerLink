@@ -5,6 +5,7 @@
     /// </summary>
 
     [Serializable]
+    [Owned]
     public class Currency : ValueObject<Currency>
     {
         private Currency(string code)
