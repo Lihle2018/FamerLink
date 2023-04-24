@@ -1,6 +1,4 @@
-﻿using System.Data;
-
-namespace Domain.Entities
+﻿namespace Domain.Entities
 {
     /// <summary>
     /// represents a person who has an account on the app and can use it to perform various actions, such as making purchases, managing their account settings, and possibly also selling products as a vendor.
