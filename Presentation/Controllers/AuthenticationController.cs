@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Domain.Interfaces.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Org.BouncyCastle.Asn1.Cms;
 using Presentation.DTOs;
+using Presentation.Services;
 using System.CodeDom.Compiler;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -16,17 +18,35 @@ namespace Presentation.Controllers
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
-        private readonly IConfiguration _config;
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
-        public AuthenticationController(IConfiguration configuration, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        private readonly AuthenticationMediator _mediator;
+        private readonly IEmailService _emailService;
+
+        public AuthenticationController(IEmailService emailService, AuthenticationMediator mediator)
         {
-            _config= configuration; 
-            _userManager= userManager;
-            _signInManager= signInManager;
+            _emailService = emailService;
+            _mediator= mediator;
+            
+        }
+        [HttpPost("register")]
+        public async Task<IActionResult> Register(RegisterDto model)
+        {
+            if(ModelState.IsValid)
+            {
+                var result = await _mediator.Register(model);
+                if (result == null)
+                {
+                    return BadRequest("Something went wrong, Please try again");
+                }
+                else
+                {
+                    _emailService.SendEmail(model.Email, "Welcome", "You are one of us now");
+                    return Ok();
+                }
+            }
+            return BadRequest(string.Join("\n", ModelState.Select(x => x.Value.Errors)));
         }
 
-       
+
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -34,43 +54,15 @@ namespace Presentation.Controllers
         {
             if(ModelState.IsValid)
             {
-                var user =await Authenticate(User);
+                var user =await _mediator.Authenticate(User);
                 if(user!=null)
                 {
-                    var token = GenerateToken(user);
-                    return Ok(token);
+                   
+                    return Ok(user.Token);
                 }
                 return NotFound("User not found");
             }
             return Unauthorized("Password or username is invalid");
-        }
-
-        private string GenerateToken(IdentityUser user)
-        {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-            var claims = new[]
-           {
-                new Claim(ClaimTypes.NameIdentifier, user.UserName)
-           };
-            var token = new JwtSecurityToken(_config["Jwt:Issuer"],
-               _config["Jwt:Audience"],
-               claims,
-               expires: DateTime.Now.AddMinutes(15),
-               signingCredentials: credentials);
-            return new JwtSecurityTokenHandler().WriteToken(token);
-        }
-
-        private async Task<IdentityUser> Authenticate(LoginDto model)
-        {
-            // Authenticate user using SignInManager
-            var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, false);
-            if (result.Succeeded)
-            {
-                var user = await _userManager.FindByNameAsync(model.Username);
-                return user;
-            }
-            return null;
         }
     }
 }

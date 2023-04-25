@@ -1,11 +1,13 @@
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
+using Domain.Services;
 using FarmLink.Infrastructure.Data;
 using Infrastructure.Data.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Presentation.Services;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -40,6 +42,9 @@ builder.Services.AddScoped<SignInManager<IdentityUser>>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddTransient<IAuthenticationMediator, AuthenticationMediator>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
 
 var app = builder.Build();
 
