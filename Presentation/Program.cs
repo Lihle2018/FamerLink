@@ -34,17 +34,15 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     };
 });
 // Add identity services
-builder.Services.AddIdentity<IdentityUser, IdentityRole>();
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<FarmLinkDbContext>().AddDefaultTokenProviders(); 
 // Add user identity
 builder.Services.AddScoped<UserManager<IdentityUser>>();
 builder.Services.AddScoped<SignInManager<IdentityUser>>();
 // Add application services
-builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
-builder.Services.AddScoped<IOrderRepository, OrderRepository>();
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddTransient<IAuthenticationMediator, AuthenticationMediator>();
 builder.Services.AddScoped<IEmailService, EmailService>();
-builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddTransient<ITokenService, TokenService>();
 
 var app = builder.Build();
 
