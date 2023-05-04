@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(FarmLinkDbContext))]
-    [Migration("20230422111012_initial")]
+    [Migration("20230504145108_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -488,6 +488,429 @@ namespace Infrastructure.Migrations
                     b.ToTable("VendorTags");
                 });
 
+            modelBuilder.Entity("Domain.Entities.WelcomeMessage", b =>
+                {
+                    b.Property<int>("MessageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MessageId"), 1L, 1);
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MessageId");
+
+                    b.ToTable("WelcomeMessages");
+
+                    b.HasData(
+                        new
+                        {
+                            MessageId = 1,
+                            Content = "We're thrilled to have you as part of our team.",
+                            Subject = "Welcome aboard!"
+                        },
+                        new
+                        {
+                            MessageId = 2,
+                            Content = "We appreciate you choosing our service.",
+                            Subject = "Thanks for signing up!"
+                        },
+                        new
+                        {
+                            MessageId = 3,
+                            Content = "We can't wait to get to know you better.",
+                            Subject = "You're officially part of the family!"
+                        },
+                        new
+                        {
+                            MessageId = 4,
+                            Content = "We're happy to have you as a member.",
+                            Subject = "Welcome to the club!"
+                        },
+                        new
+                        {
+                            MessageId = 5,
+                            Content = "We're thrilled to have you here. Let us know if you need anything.",
+                            Subject = "Welcome to our platform!"
+                        },
+                        new
+                        {
+                            MessageId = 6,
+                            Content = "We're excited to see what you'll do with our platform.",
+                            Subject = "Thanks for joining us!"
+                        },
+                        new
+                        {
+                            MessageId = 7,
+                            Content = "You're now part of our community. Let's get started!",
+                            Subject = "Welcome aboard!"
+                        },
+                        new
+                        {
+                            MessageId = 8,
+                            Content = "We hope you'll enjoy our platform and find it useful.",
+                            Subject = "It's great to have you!"
+                        },
+                        new
+                        {
+                            MessageId = 9,
+                            Content = "We're looking forward to working with you.",
+                            Subject = "Welcome to the team!"
+                        },
+                        new
+                        {
+                            MessageId = 10,
+                            Content = "We appreciate your interest in our platform.",
+                            Subject = "Thanks for signing up!"
+                        },
+                        new
+                        {
+                            MessageId = 11,
+                            Content = "We'll do our best to make you feel at home here.",
+                            Subject = "Welcome to our family!"
+                        },
+                        new
+                        {
+                            MessageId = 12,
+                            Content = "Congratulations on joining our platform. Let's make great things happen!",
+                            Subject = "You're in!"
+                        },
+                        new
+                        {
+                            MessageId = 13,
+                            Content = "We're so happy you're here. Let's have some fun!",
+                            Subject = "Welcome to the party!"
+                        },
+                        new
+                        {
+                            MessageId = 14,
+                            Content = "Thanks for choosing our platform. We can't wait to see what you'll do with it.",
+                            Subject = "Let's get started!"
+                        },
+                        new
+                        {
+                            MessageId = 15,
+                            Content = "You're now part of a vibrant community. Enjoy your stay!",
+                            Subject = "Welcome to the club!"
+                        },
+                        new
+                        {
+                            MessageId = 16,
+                            Content = "We're excited to have you as part of our platform.",
+                            Subject = "It's nice to meet you!"
+                        },
+                        new
+                        {
+                            MessageId = 17,
+                            Content = "We're making a difference together.",
+                            Subject = "Thanks for joining our cause!"
+                        },
+                        new
+                        {
+                            MessageId = 18,
+                            Content = "We hope you'll find our platform interesting and useful.",
+                            Subject = "Welcome to our world!"
+                        },
+                        new
+                        {
+                            MessageId = 19,
+                            Content = "Thanks for joining our platform. Let's collaborate and create something amazing!",
+                            Subject = "We're better together!"
+                        },
+                        new
+                        {
+                            MessageId = 20,
+                            Content = "We're happy to welcome you to our platform.",
+                            Subject = "You're one of us now!"
+                        },
+                        new
+                        {
+                            MessageId = 21,
+                            Content = "We're using cutting-edge technology to make a difference. Join us!",
+                            Subject = "Welcome to the future!"
+                        },
+                        new
+                        {
+                            MessageId = 22,
+                            Content = "Together, we can achieve great things.",
+                            Subject = "Thanks for being part of our community!"
+                        },
+                        new
+                        {
+                            MessageId = 23,
+                            Content = "We're a diverse and inclusive community. Welcome!",
+                            Subject = "You belong here!"
+                        },
+                        new
+                        {
+                            MessageId = 24,
+                            Content = "We're excited to have you as part of our platform.",
+                            Subject = "Welcome to the family!"
+                        },
+                        new
+                        {
+                            MessageId = 25,
+                            Content = "We're honored that you've decided to join our platform.",
+                            Subject = "Thanks for choosing us!"
+                        },
+                        new
+                        {
+                            MessageId = 26,
+                            Content = "We're challenging the status quo and creating a better future.",
+                            Subject = "Welcome to the revolution!"
+                        },
+                        new
+                        {
+                            MessageId = 27,
+                            Content = "We hope you'll enjoy our platform and find it useful.",
+                            Subject = "It's great to have you here!"
+                        },
+                        new
+                        {
+                            MessageId = 28,
+                            Content = "We're writing history together.",
+                            Subject = "Thanks for becoming part of our story!"
+                        },
+                        new
+                        {
+                            MessageId = 29,
+                            Content = "We're excited to see what you'll bring to our community.",
+                            Subject = "Thank you for joining us!"
+                        },
+                        new
+                        {
+                            MessageId = 30,
+                            Content = "Let's get started on this journey together.",
+                            Subject = "We're so glad you're here!"
+                        },
+                        new
+                        {
+                            MessageId = 31,
+                            Content = "We're here to support you every step of the way.",
+                            Subject = "Welcome to the family!"
+                        },
+                        new
+                        {
+                            MessageId = 32,
+                            Content = "We can't wait to see what you'll accomplish with us.",
+                            Subject = "Let's get started!"
+                        },
+                        new
+                        {
+                            MessageId = 33,
+                            Content = "We're looking forward to working with you.",
+                            Subject = "Welcome to the team!"
+                        },
+                        new
+                        {
+                            MessageId = 34,
+                            Content = "We're so excited to have you join us.",
+                            Subject = "Welcome to our community!"
+                        });
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
+                });
+
             modelBuilder.Entity("Domain.Entities.Customer", b =>
                 {
                     b.HasOne("Domain.Entities.Location", "Location")
@@ -874,6 +1297,57 @@ namespace Infrastructure.Migrations
                     b.Navigation("Tag");
 
                     b.Navigation("Vendor");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Entities.Customer", b =>

@@ -18,10 +18,10 @@ namespace Presentation.Controllers
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
-        private readonly AuthenticationMediator _mediator;
+        private readonly IAuthenticationMediator _mediator;
         private readonly IEmailService _emailService;
 
-        public AuthenticationController(IEmailService emailService, AuthenticationMediator mediator)
+        public AuthenticationController(IEmailService emailService, IAuthenticationMediator mediator)
         {
             _emailService = emailService;
             _mediator= mediator;
@@ -30,7 +30,7 @@ namespace Presentation.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterDto model)
         {
-            if(ModelState.IsValid)
+           if(ModelState.IsValid)
             {
                 var result = await _mediator.Register(model);
                 if (result == null)

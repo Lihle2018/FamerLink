@@ -5,13 +5,6 @@ namespace Domain.Services
 {
     public class EmailService : IEmailService
     {
-      
-
-//var smtpClient = new SmtpClient("smtp.gmail.com", 587);
-//smtpClient.UseDefaultCredentials = false;
-//smtpClient.Credentials = new NetworkCredential("your-email-address@gmail.com", "your-email-password");
-//smtpClient.EnableSsl = true;
-
         public EmailService()
         {
            

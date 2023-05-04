@@ -13,6 +13,7 @@
         ICartItemRepository CartItems { get; }
         IReviewRepository Reviews { get; }
         ITagRepository Tags { get; }
+        IWelcomeMessageRepository WelcomeMessages { get; }
 
         void Save();
         Task SaveAsync();

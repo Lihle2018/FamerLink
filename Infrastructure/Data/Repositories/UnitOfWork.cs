@@ -19,6 +19,8 @@
             Tags = new TagRepository(_context);
             ProductTags = new ProductTagRepository(_context);
             VendorTags = new VendorTagRepository(_context);
+            WelcomeMessages=new WelcomeMessageRepository(_context);
+           
         }
 
         public ICustomerRepository Customers { get; }
@@ -35,6 +37,7 @@
         public IVendorTagRepository VendorTags { get; }
 
         public IPromotionRepository Promotions { get; }
+        public IWelcomeMessageRepository WelcomeMessages { get; }
 
         public void Save()
         {
