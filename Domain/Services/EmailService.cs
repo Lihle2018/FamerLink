@@ -15,7 +15,7 @@ namespace Domain.Services
             // Create a new MailMessage object
             MailMessage message = new MailMessage("student24donotreply@gmail.com", toAddress, subject, body) { Priority = MailPriority.High, ReplyTo = new MailAddress("student24donotreply@gmail.com") };
             // Set the server and credentials for sending the email
-            var password = "oxdzqdneoaxpqzsc";
+            var password = "";
             var smtp = new SmtpClient
             {
                 Host = "smtp.gmail.com",
